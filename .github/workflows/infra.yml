@@ -1,0 +1,16 @@
+name: Infra
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform-plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+      - name: Terraform Init & Plan
+        run: |
+          cd terraform/envs/dev
+          terraform init -input=false
+          terraform plan -no-color
